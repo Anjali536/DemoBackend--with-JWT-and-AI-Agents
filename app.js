@@ -63,6 +63,12 @@ mongoose.connect("mongodb://sarojini46k_db_user:vxQAJ8jvIH0XZV1u@ac-yjnobyx-shar
     .then(() => console.log("DB connected"))
     .catch((err) => console.log(err));
 
+const userSchema = new mongoose.Schema({
+    email: String,
+    password: String
+});
+
+const User = mongoose.model("User", userSchema);
 
 const historySchema = new mongoose.Schema({
     userEmail : String,
@@ -75,10 +81,10 @@ const historySchema = new mongoose.Schema({
 });
 const History = mongoose.model("History", historySchema);
 
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000, () => {
-    console.log("server running")
-    console.log("On: http://localhost:3000/get-user")
+app.listen(PORT, () => {
+    console.log("server running");
 });
 
 app.get('/get-user', (req,res) => {
